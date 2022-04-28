@@ -1,0 +1,64 @@
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form class="mainform" [formGroup]="formGroup" (submit)="onSubmit(formGroup)">
+                    <h1>Fattura</h1>
+                    <div class="form-group mb-3">
+                        <label for="data">Data*</label>
+                        <input id="data" [readonly]="disabledValue" formControlName="data" class="form-control"
+                            type="date" autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['data'].touched && formGroup.controls['data'].errors">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="numero">Numero*</label>
+                        <input id="numero" [readonly]="disabledValue" formControlName="numero" class="form-control"
+                            type="number" autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['numero'].touched && formGroup.controls['numero'].errors">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="anno">Anno*</label>
+                        <input id="anno" [readonly]="disabledValue" formControlName="anno" class="form-control"
+                            type="text" autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['anno'].touched && formGroup.controls['anno'].errors">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="importo">Importo*</label>
+                        <input id="importo" [readonly]="disabledValue" formControlName="importo" class="form-control"
+                            type="text" autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['importo'].touched && formGroup.controls['importo'].errors">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Stato</label>
+                        <select class="form-control" formControlName="stato" id="stato" *ngIf="statiFatture && fatture">
+                            <option value=""></option>
+                            <option *ngFor="let sf of statiFatture" value="{{ sf.id }}"
+                                [attr.selected]="sf.id === fatture.stato.id ? true : null">{{ sf.nome }}</option>
+                        </select>
+                        <select class="form-control" formControlName="stato" id="stato2" *ngIf="id == 0">
+                            <option value=""></option>
+                            <option *ngFor="let sf of statiFatture" value="{{ sf.id }}">{{ sf.nome }}</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-4 salva"
+                                [disabled]="formGroup.invalid">Salva</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

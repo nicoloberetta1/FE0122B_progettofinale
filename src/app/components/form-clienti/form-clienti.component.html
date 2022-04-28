@@ -1,0 +1,132 @@
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form class="mainform" [formGroup]="formGroup" (submit)="onSubmit(formGroup)">
+                    <h1>Cliente</h1>
+                    <div class=" form-group mb-3">
+                        <label class="form-label">Ragione Sociale*</label>
+                        <input id="ragioneSociale" formControlName="ragioneSociale" class="form-control" type="text"
+                            autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['ragioneSociale'].touched && formGroup.controls['ragioneSociale'].errors">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Partita Iva*</label>
+                        <input id="partitaIva" formControlName="partitaIva" class="form-control" type="text"
+                            autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['partitaIva'].touched && formGroup.controls['partitaIva'].errors">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Email*</label>
+                        <input id="email" formControlName="email" class="form-control" type="email"
+                            autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['email'].touched && formGroup.controls['email'].errors">Inserire
+                            una email valida</span>
+                    </div>
+                    <div class=" form-group mb-3">
+                        <label class="form-label">Tipo Cliente*</label>
+                        <select class="form-select" aria-label="Default select example" id="tipoCliente"
+                            formControlName="tipoCliente" *ngIf="tipoCliente">
+                            <option *ngFor="let tc of tipoCliente" value="{{ tc }}">{{ tc }}</option>
+                        </select>
+                        <span class="errore"
+                            *ngIf="formGroup.controls['tipoCliente'].invalid && formGroup.controls['tipoCliente'].touched">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Pec</label>
+                        <input id="pec" formControlName="pec" class="form-control" type="text" autocomplete="false" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Telefono</label>
+                        <input id="telefono" formControlName="telefono" class="form-control" type="text"
+                            autocomplete="false" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Nome Contatto</label>
+                        <input id="nomeContatto" formControlName="nomeContatto" class="form-control" type="text"
+                            autocomplete="false" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Cognome Contatto</label>
+                        <input id="cognomeContatto" formControlName="cognomeContatto" class="form-control" type="text"
+                            autocomplete="false" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Telefono Contatto</label>
+                        <input id="telefonoContatto" formControlName="telefonoContatto" class="form-control" type="text"
+                            autocomplete="false" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Email Contatto*</label>
+                        <input id="emailContatto" formControlName="emailContatto" class="form-control" type="text"
+                            autocomplete="false" />
+                        <span class="errore"
+                            *ngIf="formGroup.controls['emailContatto'].touched && formGroup.controls['emailContatto'].errors">Campo
+                            Obbligatorio</span>
+                    </div>
+                    <div formGroupName="indirizzoSedeOperativa">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Via</label>
+                            <input id="via" formControlName="via" class="form-control" type="text"
+                                autocomplete="false" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Civico</label>
+                            <input id="civico" formControlName="civico" class="form-control" type="text"
+                                autocomplete="false" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Cap</label>
+                            <input id="cap" formControlName="cap" class="form-control" type="text"
+                                autocomplete="false" />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Localita</label>
+                            <input id="localita" formControlName="localita" class="form-control" type="text"
+                                autocomplete="false" />
+                        </div>
+                        <div class="comune" formGroupName="comune">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Comune*</label>
+                                <select class="form-control" formControlName="id" id="comune" *ngIf="comune">
+                                    <option value=""></option>
+                                    <option *ngFor="let c of comune"
+                                        [attr.selected]="cliente && c.id === cliente.indirizzoSedeOperativa.comune.id ? true : null"
+                                        value="{{ c.id }}">{{ c.nome }}</option>
+                                </select>
+                            </div>
+                            <div class="provincia" formGroupName="provincia">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Provincia</label>
+                                    <select class="form-control" formControlName="provincia" id="provincia"
+                                        *ngIf="provincia">
+                                        <option value=""></option>
+                                        <option *ngFor="let p of provincia"
+                                            [attr.selected]="cliente && p.id === cliente.indirizzoSedeOperativa.comune.provincia.id ? true : null"
+                                            value="{{ p.id }}">{{ p.nome }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-4 salva"
+                                [disabled]="formGroup.invalid">Salva</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

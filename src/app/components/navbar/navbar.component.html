@@ -1,0 +1,39 @@
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark text-white">
+    <h1>CRM FINALE</h1>
+    <div class="contaianer-fluid">
+        <div id="navbar">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/']" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/login']"
+                        *ngIf="!utenteLoggato()">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/signup']"
+                        routerLinkActive="active">Signup</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/lista-utenti']"
+                        routerLinkActive="active" *ngIf=" utenteLoggato()">Utenti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/lista-clienti']"
+                        routerLinkActive="active" *ngIf=" utenteLoggato()">Clienti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/lista-fatture']"
+                        routerLinkActive="active" *ngIf=" utenteLoggato()">Fatture</a>
+                </li>
+                <li class="nav-item"*ngIf=" utenteLoggato()">
+                    <button class="btn btn-danger"  (click)="logOut()">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+

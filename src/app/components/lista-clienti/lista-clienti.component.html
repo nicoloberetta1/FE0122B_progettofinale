@@ -1,0 +1,45 @@
+<ng-container *ngIf="clienti; else spinner">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ragione Sociale</th>
+                <th>Email</th>
+                <th>Partita Iva</th>
+                <th><button [routerLink]="['/form-clienti/0']" class="btn btn-success bottone">Nuovo Cliente</button>
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of clienti, let i = index">
+                <td>{{cliente.id}}</td>
+                <td>{{cliente.ragioneSociale}}</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.partitaIva}}</td>
+                <td><button [routerLink]="['/fatture-cliente', cliente.id]"
+                        class="btn btn-info bottone">Fatture</button></td>
+                <td><button [routerLink]="['/form-clienti', cliente.id]"
+                        class="btn btn-warning bottone">Modifica</button></td>
+                <td><button (click)="eliminaCliente(cliente.id, i, cliente.ragioneSociale)"
+                        class="btn btn-danger bottone">Elimina</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example bg-dark text-white">
+        <ul class="pagination" *ngIf="response">
+            <li class="page-item" *ngIf="!response.first"><button class="page-link bg-dark text-white"
+                    (click)="cambiaPagina(response.number -1)">Precedente</button></li>
+            <li class="page-item" *ngFor="let np of numeroPag; let p = index"><button
+                    class="page-link bg-dark text-white" (click)="cambiaPagina(p)">{{p+1}}</button></li>
+            <li class="page-item" *ngIf="!response.last"><button class="page-link bg-dark text-white"
+                    (click)="cambiaPagina(response.number +1)">Prossima</button></li>
+        </ul>
+    </nav>
+</ng-container>
+
+<ng-template #spinner>
+    <div class="spinner-border spin" role="status">
+    </div>
+</ng-template>

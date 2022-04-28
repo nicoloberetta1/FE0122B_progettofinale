@@ -1,0 +1,50 @@
+<ng-container *ngIf="fatture; else spinner">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Data</th>
+                <th>Numero</th>
+                <th>Anno</th>
+                <th>Importo</th>
+                <th>Stato</th>
+                <th>Cliente</th>
+                <th><button class="btn btn-success bottone" [routerLink]="['/form-fatture',0,idCliente]"
+                        *ngIf="idCliente">Nuova Fattura </button></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let fattura of fatture, let i = index">
+                <td>{{ fattura.id }}</td>
+                <td>{{ fattura.data | date }}</td>
+                <td>{{ fattura.numero }}</td>
+                <td>{{ fattura.anno }}</td>
+                <td>{{ fattura.importo |currency:"EUR":"symbol"}}</td>
+                <td>{{ fattura.stato.nome }}</td>
+                <td>{{ fattura.cliente.ragioneSociale }}</td>
+                <td><button class="btn btn-warning bottone"
+                        [routerLink]="['/form-fatture', fattura.id]">Modifica</button></td>
+                <td><button class="btn btn-danger bottone"
+                        (click)="eliminaFatture(fattura.id,i,fattura.numero)">Elimina</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example bg-dark text-white">
+        <ul class="pagination" *ngIf="response">
+            <li class="page-item" *ngIf="!response.first"><button class="page-link bg-dark text-white"
+                    (click)="cambiaPagina(0)">Primo</button></li>
+            <li class="page-item" *ngIf="!response.first"><button class="page-link bg-dark text-white"
+                    (click)="cambiaPagina(response.number-1)">Precedente</button></li>
+            <li class="page-item" *ngIf="!response.last"><button class="page-link bg-dark text-white"
+                    (click)="cambiaPagina(response.number+1)">Prossimo</button></li>
+            <li class="page-item" *ngIf="!response.last"><button class="page-link bg-dark text-white"
+                    (click)="cambiaPagina(response.totalPages-1)">Ultimo</button></li>
+        </ul>
+    </nav>
+</ng-container>
+
+<ng-template #spinner>
+    <div class="spinner-border spin" role="status">
+    </div>
+</ng-template>

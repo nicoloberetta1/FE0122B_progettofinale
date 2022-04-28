@@ -1,0 +1,43 @@
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form class="form" [formGroup]="formGroup" (submit)="onSubmit(formGroup)">
+                    <h1>Sign Up</h1>
+                    <p>Inseriesci i tuoi dati</p>
+                    <div class="form-group mb-3">
+                        <label for="username">Username*</label>
+                        <input id="username" required formControlName="username" class="form-control" type="text"
+                            autocomplete="false" />
+                            <span class="errore" *ngIf="formGroup.controls['username'].touched && formGroup.controls['username'].errors">Campo Obbligatorio</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Email*</label>
+                        <input id="email" required formControlName="email" class="form-control" type="email"
+                            autocomplete="false" />
+                            <span class="errore" *ngIf="formGroup.controls['email'].touched && formGroup.controls['email'].errors">Inserire una email valida</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password">Password*</label>
+                        <input id="password" required formControlName="password" class="form-control" type="password"
+                            autocomplete="false" />
+                            <span class="errore" *ngIf="formGroup.controls['password'].touched && formGroup.controls['password'].errors">La password deve contenere minimo 6 caratteri</span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="options">Roles</label>
+                        <select class="form-select" aria-label="Default select example" required formControlName="role">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-4 signUp"
+                                [disabled]="formGroup.invalid">Signup</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
